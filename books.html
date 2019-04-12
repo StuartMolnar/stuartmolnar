@@ -1,0 +1,278 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Books</title>
+    <link rel="stylesheet" href="css/stylesheets.css">
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBsL6HWkrMdNHW_mgaV5vSKyMn3osgDzEE",
+            authDomain: "project-79a00.firebaseapp.com",
+            databaseURL: "https://project-79a00.firebaseio.com",
+            projectId: "project-79a00",
+            storageBucket: "project-79a00.appspot.com",
+            messagingSenderId: "243640414314"
+        };
+        firebase.initializeApp(config);
+    </script>
+</head>
+<body onload="addCards(); setName()">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark dark">
+    <a class="navbar-brand" href="index.html">Stuart Molnar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNavAltMarkup">
+        <div class="navbar-nav mr-auto">
+            <!--<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
+            <a class="nav-item nav-link" href="aboutme.html">About Me</a>
+            <a class="nav-item nav-link" href="mycat.html">My Cat</a>
+            <a class="nav-item nav-link" href="movies.html">Movies</a>
+            <a class="nav-item nav-link" href="shows.html">Shows</a>
+            <a class="nav-item nav-link" href="books.html">Books</a>
+            <a class="nav-item nav-link" href="music.html">Music</a>
+
+        </div>
+        <div class="navbar-nav">
+            <a id="username" class="nav-item nav-link" data-toggle="modal" data-target="#accountModal"></a>
+            <a id="card-button" class="nav-item nav-link" href="addcard.html">Add Card</a>
+
+            <div class="nav-item dropdown">
+                <!--
+                    <a class="dropdown-item" data-toggle="modal" data-target="#accountModal">Sign In</a> -->
+                <a class="nav-link dropdown-toggle navbar-dropdown" href="account.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="account.html">Account</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" onclick="signOut()">Log Out</a>
+                </div>
+            </div>
+            -->
+        </div>
+
+    </div>
+
+</nav>
+
+
+<img class="d-block w-100 book-img" src="images/wheel-of-time.jpg" alt="First slide">
+
+<div class="container book-text text-center border border-light">
+    <strong class="book-header">Books</strong>
+    <p class="book-description">My favourite series</p>
+</div>
+
+
+<div class="container">
+    <div id="cardgroup" class="row justify-content-center">
+</div>
+
+
+
+</div>
+
+<!-- card test
+<div class="card-group">
+
+
+    <div class="card card-test" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-dark">Go somewhere</a>
+        </div>
+    </div>
+
+
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-dark">Go somewhere</a>
+        </div>
+    </div>
+
+
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-dark">Go somewhere</a>
+        </div>
+    </div>
+</div>
+-->
+
+<!-- Account Modal + Form -->
+<div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="form-group">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Account Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="email">Email address: </label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password: </label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary" onclick="signIn()">Sign In</button>
+                        <button type="button" class="btn btn-info" onclick="addUser()">Create User</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="footer">
+    <p>Copyright 2019 Stuart Molnar</p>
+</div>
+
+<!-- Optional JavaScript -->
+<script src="js/js.js"></script>
+
+<script>
+    function addCards() {
+        var Cards = firebase.firestore();
+        //script to write cards into card-group div
+        var cardgroup = document.getElementById('cardgroup');
+        Cards.collection('Cards').get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if (doc.data().Type == 'book') {
+
+                    console.log(doc.data().Type);
+                    cardgroup.innerHTML +=
+                        `<div class="card m-2 show-card text-center" style="width: 20rem;">
+                            <img class="card-img-top" src="${doc.data().Image}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>${doc.data().Name}</strong></h5>
+                                <p class="card-text">${doc.data().Description}</p>
+                                <a href="${doc.data().Link}" class="btn btn-dark">Learn more</a>
+                            </div>
+                        </div>`
+                }
+
+                //console.log(doc.data().Link);
+            })
+        })
+    }
+
+
+</script>
+<script>
+    // scripts for dealing with authentication
+    function closeModal(name){
+        var temp = '#' + name + 'Modal';
+        $(temp).modal('hide');
+        console.log(temp);
+    }
+
+    function addUser(){
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        firebase.auth().createUserWithEmailAndPassword(email,password).catch(function(error){
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage + error.message);
+        });
+    }
+    function signIn(){
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        firebase.auth().signInWithEmailAndPassword(email,password).catch(function(error){
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage + error.message);
+        });
+        setName();
+        firebase.auth().onAuthStateChanged(function(user){
+            if (user){
+                closeModal('account');
+            }
+        });
+    }
+
+    function signOut(){
+        firebase.auth().onAuthStateChanged(function(user){
+            if (user) {
+                //user is signed in
+                consolelog(user.toJSON());
+            } else {
+                //no user signed in
+            }
+        });
+
+        var username = document.getElementById("username");
+        username.innerHTML = "Sign In";
+        $('#card-button').addClass('disabled');
+    }
+
+    //fix blue color of add card
+    function setName(){
+        firebase.auth().onAuthStateChanged((user) => {
+            var username = document.getElementById("username");
+            if (user) {
+                // User logged in already or has just logged in.
+                username.innerHTML = "Logged in as " + user.email;
+            } else {
+                // User not logged in or has just logged out.
+
+                username.innerHTML = "Not logged in";
+            }
+        });
+
+        $('#card-button').removeClass('disabled');
+        closeModal();
+        /*
+        var username = document.getElementById("username");
+        username.innerHTML = "Logged in as " + email;
+        $('#card-button').removeClass('disabled');
+        closeModal();
+        */
+    }
+
+
+</script>
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

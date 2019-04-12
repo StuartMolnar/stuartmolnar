@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Add Card</title>
+    <link rel="stylesheet" href="css/stylesheets.css">
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBsL6HWkrMdNHW_mgaV5vSKyMn3osgDzEE",
+            authDomain: "project-79a00.firebaseapp.com",
+            databaseURL: "https://project-79a00.firebaseio.com",
+            projectId: "project-79a00",
+            storageBucket: "project-79a00.appspot.com",
+            messagingSenderId: "243640414314"
+        };
+        firebase.initializeApp(config);
+    </script>
+</head>
+<body onload="setName()">
+
+<nav class="navbar navbar-expand-lg navbar-dark dark">
+    <a class="navbar-brand" href="index.html">Stuart Molnar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNavAltMarkup">
+        <div class="navbar-nav mr-auto">
+            <!--<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
+            <a class="nav-item nav-link" href="aboutme.html">About Me</a>
+            <a class="nav-item nav-link" href="mycat.html">My Cat</a>
+            <a class="nav-item nav-link" href="movies.html">Movies</a>
+            <a class="nav-item nav-link" href="shows.html">Shows</a>
+            <a class="nav-item nav-link" href="books.html">Books</a>
+            <a class="nav-item nav-link" href="music.html">Music</a>
+
+        </div>
+        <div class="navbar-nav">
+            <a id="username" class="nav-item nav-link" data-toggle="modal" data-target="#accountModal"></a>
+            <a id="card-button" class="nav-item nav-link" href="addcard.html">Add Card</a>
+
+            <div class="nav-item dropdown">
+                <!--
+                    <a class="dropdown-item" data-toggle="modal" data-target="#accountModal">Sign In</a> -->
+                <a class="nav-link dropdown-toggle navbar-dropdown" href="account.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="account.html">Account</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" onclick="signOut()">Log Out</a>
+                </div>
+            </div>
+            -->
+        </div>
+
+    </div>
+
+</nav>
+
+
+<img class="d-block w-100 book-img" src="images/firebasecover.png" alt="First slide">
+
+<div id="card-buttons" class="btn-group btn-group-toggle btn-block" data-toggle="button">
+
+        <label id="button1" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#movie-modal">
+            <input type="radio" name="options" id="option1"> Movies
+        </label>
+
+        <label id="button2" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#show-modal">
+            <input type="radio" name="options" id="option2"> Shows
+        </label>
+
+        <label id="button3" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#book-modal">
+            <input type="radio" name="options" id="option3"> Books
+        </label>
+
+        <label id="button4" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#music-modal">
+            <input type="radio" name="options" id="option4"> Music
+        </label>
+</div>
+
+
+<div class="container">
+    <div id="about-me-jumbo-2" class="jumbotron border border-light jumbo-firebase">
+        <h1 class="display-4"><strong>Card Submissions</strong></h1>
+        <p class="lead">Each button will open a form for its specific page. You can enter information into this form and it will populate a new card on the respective page.</p>
+        <hr class="my-4">
+        <a id="jumbo-sign-in" class="sign-jumbo sign-button-jumbo nav-item nav-link" data-toggle="modal" data-target="#accountModal">Sign In</a>
+        <p class="sign-jumbo"> to access the form buttons.</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- MODALS SECTION -->
+<!-- movie modal -->
+<div class="modal fade" id="movie-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="form-group">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="movie-modal-label">Movie Submission</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="movie-name">Name: </label>
+                            <input type="text" class="form-control" id="movie-name" placeholder="Enter title...">
+                        </div>
+                        <div class="form-group">
+                            <label for="movie-description">Description: </label>
+                            <input type="text" class="form-control" id="movie-description" placeholder="Description...">
+                        </div>
+                        <div class="form-group">
+                            <label for="movie-link">IMDB Link: </label>
+                            <input type="text" class="form-control" id="movie-link" placeholder="Url...">
+                        </div>
+                        <div class="form-group">
+                            <label for="movie-url">Image Link: </label>
+                            <input type="text" class="form-control" id="movie-url" placeholder="Url...">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary" onclick="sendInfo('movie')">Add Card</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- show modal -->
+<div class="modal fade" id="show-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="form-group">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="show-modal-label">Show Submission</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="show-name">Name: </label>
+                            <input type="text" class="form-control" id="show-name" placeholder="Enter title...">
+                        </div>
+                        <div class="form-group">
+                            <label for="show-description">Description: </label>
+                            <input type="text" class="form-control" id="show-description" placeholder="Description...">
+                        </div>
+                        <div class="form-group">
+                            <label for="show-link">IMDB Link: </label>
+                            <input type="text" class="form-control" id="show-link" placeholder="Url...">
+                        </div>
+                        <div class="form-group">
+                            <label for="show-url">Image Link: </label>
+                            <input type="text" class="form-control" id="show-url" placeholder="Url...">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary" onclick="sendInfo('show')">Add Card</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- book modal -->
+<div class="modal fade" id="book-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="form-group">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="book-modal-label">Book Submission</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="book-name">Name: </label>
+                            <input type="text" class="form-control" id="book-name" placeholder="Enter title...">
+                        </div>
+                        <div class="form-group">
+                            <label for="book-description">Description: </label>
+                            <input type="text" class="form-control" id="book-description" placeholder="Description...">
+                        </div>
+                        <div class="form-group">
+                            <label for="book-link">Wiki Link: </label>
+                            <input type="text" class="form-control" id="book-link" placeholder="Url...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="book-url">Image Link: </label>
+                            <input type="text" class="form-control" id="book-url" placeholder="Url...">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary" onclick="sendInfo('book')">Add Card</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- music modal -->
+<div class="modal fade" id="music-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="form-group">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="music-modal-label">Music Submission</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="music-name">Song: </label>
+                            <input type="text" class="form-control" id="music-name" placeholder="Enter title...">
+                        </div>
+                        <div class="form-group">
+                            <label for="music-description">Band: </label>
+                            <input type="text" class="form-control" id="music-description" placeholder="Description...">
+                        </div>
+                        <div class="form-group">
+                            <label for="music-link">Youtube Link: </label>
+                            <input type="text" class="form-control" id="music-link" placeholder="Url...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="music-url">Image Link: </label>
+                            <input type="text" class="form-control" id="music-url" placeholder="Url...">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary" onclick="sendInfo('music')">Add Card</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- Account Modal + Form -->
+<div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="form-group">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Account Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="email">Email address: </label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password: </label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary" onclick="signIn()">Sign In</button>
+                        <button type="button" class="btn btn-info" onclick="addUser()">Create User</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="footer card-footer">
+    <p>Copyright 2019 Stuart Molnar</p>
+</div>
+
+
+<!-- Optional JavaScript -->
+<script src="js/js.js"></script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script>
+    var cards = firebase.firestore();
+    //make it add to database, then make other pages generate based on database data when loaded
+    //script for adding cards to database
+    function sendInfo(modal) {
+        //gets names of modal elements
+        var titlename = modal + '-name';
+        var descriptionname = modal + '-description';
+        var linkname = modal + '-link';
+        var imagename = modal + '-url';
+        //gets value of modal elements
+        var title = document.getElementById(titlename).value;
+        var description = document.getElementById(descriptionname).value;
+        var link = document.getElementById(linkname).value;
+        var image = document.getElementById(imagename).value;
+
+        var temp = modal + '-moda';
+        var docname = modal + ': ' + title;
+
+        //writes info to database
+        cards.collection('Cards').doc(docname).set({
+            Type: modal,
+            Name: title,
+            Description: description,
+            Link: link,
+            Image: image
+        });
+
+        alert("Card added successfully!");
+    }
+
+
+
+
+        //section to deal with image
+        /*
+        var storageRef = firebase.storage().ref();
+
+        var imagename = modal + '-image';
+        var image = document.getElementById(imagename);
+        var uploader = document.getElementById("uploader");
+        var holder = document.getElementById("holder");
+        console.log(imagename);
+        */
+
+
+</script>
+
+
+
+<script>
+    // scripts for dealing with authentication
+    function closeModal(name){
+        var temp = '#' + name + 'Modal';
+        $(temp).modal('hide');
+        console.log(temp);
+    }
+
+    function addUser(){
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        firebase.auth().createUserWithEmailAndPassword(email,password).catch(function(error){
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage + error.message);
+        });
+    }
+    function signIn(){
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        firebase.auth().signInWithEmailAndPassword(email,password).catch(function(error){
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage + error.message);
+        });
+        setName();
+        firebase.auth().onAuthStateChanged(function(user){
+            if (user){
+                closeModal('account');
+            }
+        });
+    }
+
+    function signOut(){
+        firebase.auth().signOut().then(function(){
+        });
+
+        var username = document.getElementById("username");
+        username.innerHTML = "Not logged in";
+    }
+
+    //fix blue color of add card
+    function setName(){
+        firebase.auth().onAuthStateChanged((user) => {
+            var username = document.getElementById("username");
+            if (user) {
+                // User logged in already or has just logged in.
+                username.innerHTML = "Logged in as " + user.email;
+
+                $('#button1').attr('data-toggle', 'modal');
+                $('#button2').attr('data-toggle', 'modal');
+                $('#button3').attr('data-toggle', 'modal');
+                $('#button4').attr('data-toggle', 'modal');
+            } else {
+                // User not logged in or has just logged out.
+
+                username.innerHTML = "Sign In";
+                $('#button1').attr('data-toggle', '#');
+                $('#button2').attr('data-toggle', '#');
+                $('#button3').attr('data-toggle', '#');
+                $('#button4').attr('data-toggle', '#');
+            }
+        });
+
+    }
+
+
+</script>
+
+</body>
+</html>
+

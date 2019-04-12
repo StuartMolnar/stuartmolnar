@@ -1,0 +1,267 @@
+.bannerContainer {
+    position:relative;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    padding-top: 50px;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.aboutme-footer {
+    padding-top: 150px;
+}
+
+.account-footer{
+    position: relative;
+    padding-top: 450px;
+}
+
+.card-footer {
+    position: relative;
+}
+
+.main-img {
+    position:absolute;
+    top:0;
+    height: 900px;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.card-img-top {
+    height:200px;
+    object-fit: cover;
+}
+
+/* fix so it crops from the top only */
+.book-img {
+    position: absolute;
+    height:500px;
+    top: 75px;
+    object-fit: cover;
+}
+
+.img-overlay {
+    width: 100%;
+    background-color: rgba(255,255,255,0.2);
+    z-index: 2;
+}
+
+.navbar {
+    position:absolute;
+    height: 75px;
+    z-index: 9;
+    background:#fff;
+    width:100%;
+    background-color: rgba(0, 0, 0,0.2);
+}
+
+.navbar-dropdown {
+    color: darkgrey;
+}
+
+.navbar-dropdown:hover{
+    color:white;
+}
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 970px;
+    }
+}
+
+.jumbotron {
+
+    position:relative;
+    z-index:9;
+    background: #fff;
+    width:100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    top:150px;
+}
+
+.lower-1 {
+    margin-top: 400px;
+    position: relative;
+}
+
+.cat-photo {
+    position:relative;
+    margin-top: 650px;
+    height:600px;
+}
+
+.cat-photo-2 {
+    position: relative;
+    height: 600px;
+    top: 75px;
+    bottom: 50px;
+}
+.cat-img {
+    height:600px;
+    object-fit: cover;
+}
+
+.cat-footer {
+    position: absolute;
+    bottom: 0;
+}
+
+.divider {
+    position: relative;
+    top: 110px;
+}
+
+#below-jumbo {
+    margin-top: 600px;
+}
+
+.jumbo-dark {
+    background-color: rgba(255, 255, 255, 0.3);
+
+}
+
+.jumbo-firebase {
+    position: absolute;
+    top: 50px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: dimgrey;
+    margin-bottom: 125px;
+}
+
+#about-me-jumbo{
+    top: 400px;
+}
+
+#about-me-jumbo-2 {
+    position: relative;
+}
+
+#add-card-jumbo {
+}
+
+#cinder-jumbo {
+    position: relative;
+    top: 600px;
+}
+
+#cinder-jumbo-lower {
+    position: relative;
+    top: 50px;
+}
+
+.book-text {
+    position: relative;
+
+    color: white;
+    font-size: 80px;
+    top: 140px;
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 550px;
+    height: 250px;
+    padding: 30px;
+}
+
+.book-header {
+    font-size: 70px;
+}
+
+.book-description {
+    font-size: 25px;
+}
+
+.my-cat {
+    height: 250px;
+    width: 400px;
+    padding-left: 70px;
+    padding-top: 55px;
+}
+#username {
+    color:white;
+}
+/* remember to specify card colors based on the selected page */
+#cardgroup {
+    margin: 5px;
+    margin-top: 335px;
+    z-index: 9;
+    margin-bottom: 50px;
+    width:100%;
+}
+
+.card-deck {
+
+}
+
+.card {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.book-card {
+    background-color: #f6e3c6;
+}
+
+.card-test {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+
+}
+
+
+#card-buttons {
+    padding-top: 550px;
+    color: white;
+}
+
+.blockquote {
+    margin-top: 40px;
+    color: white;
+    font-size: 40px;
+}
+
+.account-form {
+    position: relative;
+    top: 350px;
+    color: white;
+}
+#staticEmail {
+    color:white;
+}
+
+.pass-button {
+    margin-left: 0px;
+}
+
+.btn-transparent {
+    background-color: rgba(0,0,0,0.6);
+}
+
+#jumbo-sign-in {
+    width:100px;
+}
+
+.sign-jumbo {
+    display: inline-block;
+}
+.sign-button-jumbo {
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.1);
+}
